@@ -138,39 +138,24 @@ sander -O -i 01_Min.in -o 01_Min.out -p parm7 -c rst7 -r 01_Min.ncrst -inf 01_Mi
 
 sander uses a consistent syntax for each step of MD simulation. Here is a summary of the command line options of sander: 
 
--O 
+-O Overwrite the output files if they already exist 
 
-Overwrite the output files if they already exist 
+-i 01_Min.in ------------Choose input file (default mdin) 
 
--i 01_Min.in 
+-o 01_Min.out ---------------------Write output file (default mdout) 
 
-Choose input file (default mdin) 
+-p parm7 -------------------------Choose parameter and topology file parm7, "prmtop", "top") 
 
--o 01_Min.out 
+-c rst7 --------------------------Choose coordinate file rst7, "inpcrd", "restrt", "rst7", "crd" 
 
-Write output file (default mdout) 
+-r 01_Min.ncrst -----------------------------Write output restart file with last frame coordinates and velocities (default restrt) 
 
--p parm7 
-
-Choose parameter and topology file parm7, "prmtop", "top") 
-
--c rst7 
-
-Choose coordinate file rst7, "inpcrd", "restrt", "rst7", "crd" 
-
--r 01_Min.ncrst 
-
-Write output restart file with last frame coordinates and velocities (default restrt) 
-
--inf 01_Min.mdinfo 
-
-Write MD info file with simulation status (default mdinfo) 
+-inf 01_Min.mdinfo ----------------------------Write MD info file with simulation status (default mdinfo) 
 
 -r   restart file (last set of xyz coordinates from the simulation) 
 -x   file with trajectory (RAMP1_md.nc) 
 
-sander -O -i 02_Heat.in -o 02_Heat.out -p parm7 -c 01_Min.ncrst \ 
-
+$sander -O -i 02_Heat.in -o 02_Heat.out -p parm7 -c 01_Min.ncrst \ 
 -r 02_Heat.ncrst -x 02_Heat.nc -inf 02_Heat.mdinfo 
 
  
