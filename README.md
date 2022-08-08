@@ -3,19 +3,7 @@
 
 
 
-a. I was not able to get any "aligned" structure. Anything wrong with my receptors?
-
-b. How to align protein not displaying full sequence identity to a reference with VMD?
-
-* I guess multiseq will move all proteins
-
-* RMSD aligned on VMD is hard to use when different proteins are involved
-
-
-
-=> For now I'll use the two protein_prep.pdb (for 7E2Y and AF models made by Mohd) as reference to align the MT model.
-
-
+If there are problems, just download the prealigned pdb structure and align your structure using pymol
 
 In any case, from here, separate ligand and protein structures.
 
