@@ -76,11 +76,9 @@ packmol-memgen --pdb protein_ok.pdb --lipids SDPC:POPC:CHL1 --ratio 7:7:6 --preo
 
 Where: protein_ok.pdb is the file coming from pdb4amber
 
-Membrane composition and salt concentration is coming from papers like this one: https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1002473#s4 [not the only one using those settings]
 
 
-
-#Original command by Attilio
+#Original command
 
 #packmol-memgen -p ${pdb_move} --salt --salt_c K+ --saltcon 0.15 --salt_override --parametrize --ffwat opc --ffprot ff19SB --gaff2 --ligand_param ../mol.frcmod:../mol.off --lipids POPE:POPG --ratio 2:1 --dist 17.5 --dist_wat 17.5 --keepligs --n_ter in --random --movebadrandom --lip_offset 1.1
 
@@ -94,62 +92,24 @@ Take the PBC coordinates: e.g. Box X, Y, Z: 77.728 78.118 108.024
 
 And use them in the leap script:
 
-
-
-#source /usr/local/amber18/dat/leap/cmd/oldff/leaprc.ff99SB 
-
-#source /usr/local/amber18/dat/leap/cmd/leaprc.water.tip3p 
-
-#source /usr/local/amber18/dat/leap/cmd/leaprc.lipid14
-
+*********************tleap*********************
 source /usr/local/amber20/dat/leap/cmd/leaprc.gaff2
-
 source /usr/local/amber20/dat/leap/cmd/leaprc.protein.ff19SB
-
 source /usr/local/amber20/dat/leap/cmd/leaprc.water.opc
-
-#source /usr/local/amber20/dat/leap/parm/gaff2.dat
-
-
-
-#source /usr/local/amber20/dat/leap/parm/leaprc.protein.ff19SB
-
-#source /usr/local/amber20/dat/leap/cmd/leaprc.protein.ff19SB
-
-#source /usr/local/amber20/dat/leap/parm/frcmod.opc
-
-#source /usr/local/amber20/dat/leap/parm/leaprc.gaff2 
-
 source /home/mathar/andrea/leaprc.lipid21 
-
-
-
-#loadamberparams frcmod.ionsjc_tip3p
-
 loadamberparams frcmod.ions1lm_126_iod_opc 
-
 loadamberparams ligand.off 
-
 loadamberparams missing_gaff2.frcmod
-
 drug = loadmol2 ./ligand1.mol2 
-
 receptor = loadpdb ./protein_ok.pdb  
-
 membrane = loadpdb ./membrane.pdb 
-
 system=combine{ receptor membrane drug } 
-
 set system box {89.160 89.160 143.030}  # <- HERE THE COORDINATES TAKEN FROM “shift membrane”.
-
 saveoff system system.lib
-
 saveamberparm system system.prmtop system.inpcrd 
-
 savepdb system system.pdb 
-
 quit
-
+****************************************
 
 
 Note, if the *.py script doesn’t work, try to get the coordinates from the “FORCED” bilayer file, but then create the membrane starting not from the forced one.
@@ -163,15 +123,12 @@ Note 2: tleap needs the lipid21 files (they are at least 2, the .lib and the .da
 5. Use the following commands, in a script (parmed -i script) for HmassRep.
 
 
-
+**********************script for system.parmed***********
 parm system.prmtop
-
 HMassRepartition
-
 outparm system.hmass.prmtop
-
 quit
-
+******************************
 
 
 **6. Run the simulations. **
